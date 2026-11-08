@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Gia Sư Toán - Biện Luận Phương Trình Bậc 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- MathJax để hiển thị công thức toán học đẹp mắt -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --border: #334155;
+            --primary: #38bdf8;
+            --primary-hover: #0284c7;
+            --accent: #4ade80;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        section {
+            padding: 90px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            padding-top: 140px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .hero-text h1 span { color: var(--primary); }
+
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #0f172a;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            color: #fff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* Card Theory & Calculator */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .section-title p {
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* Theory Box */
+        .theory-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .theory-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .theory-item h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        /* Calculator Form */
+        .calc-form {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .input-group input:focus { border-color: var(--primary); }
+
+        .result-box {
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            display: none;
+        }
+
+        .result-box.active { display: block; }
+
+        .result-step {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        .result-highlight {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero, .calc-form { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">Math<span>Profile.</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">Giới Thiệu</a></li>
+                <li><a href="#theory">Lý Thuyết</a></li>
+                <li><a href="#tool">Công Cụ Giải</a></li>
+                <li><a href="#contact">Liên Hệ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="about" class="hero">
+        <div class="hero-text">
+            <h1>Gia Sư Toán Học <br><span>Chuyên Đề Đại Số</span></h1>
+            <p>Hướng dẫn chi tiết phương pháp giải và biện luận số nghiệm của phương trình bậc 2 \(ax^2 + bx + c = 0\) theo đúng chuẩn chương trình Toán học.</p>
+            <div style="display: flex; gap: 15px;">
+                <a href="#tool" class="btn btn-primary"><i class="fas fa-calculator"></i> Thử Công Cụ Giải</a>
+                <a href="#theory" class="btn btn-outline"><i class="fas fa-book"></i> Xem Lý Thuyết</a>
+            </div>
+        </div>
+        <div>
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-square-root-variable" style="font-size: 4rem; color: var(--primary); margin-bottom: 15px;"></i>
+                <h3>Phương Trình Bậc 2</h3>
+                <p style="color: var(--text-muted); margin-top: 10px;">\(ax^2 + bx + c = 0 \quad (a \neq 0)\)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Lý thuyết (Nội dung chính từ ảnh) -->
+    <section id="theory">
+        <div class="section-title">
+            <p>Kiến thức cốt lõi</p>
+            <h2>Biện Luận Số Nghiệm Phương Trình Bậc 2</h2>
+        </div>
+        <div class="card">
+            <ul class="theory-list">
+                <li class="theory-item">
+                    <h4>Bước 1: Xác định các hệ số</h4>
+                    <p>Xác định chính xác các giá trị hệ số \(a\), \(b\) và \(c\) (điều kiện \(a \neq 0\)).</p>
+                </li>
+                <li class="theory-item">
+                    <h4>Bước 2: Tính biệt số Delta (\(\Delta\))</h4>
+                    <p>Công thức: \(\Delta = b^2 - 4ac\)</p>
+                </li>
+                <li class="theory-item">
+                    <h4>Bước 3: Kết luận nghiệm theo Delta</h4>
+                    <p>• <strong>Nếu \(\Delta < 0\):</strong> Phương trình <strong>vô nghiệm</strong>.</p>
+                    <p>• <strong>Nếu \(\Delta = 0\):</strong> Phương trình có <strong>nghiệm duy nhất</strong> (nghiệm kép): \(x = -\frac{b}{2a}\).</p>
+                    <p>• <strong>Nếu \(\Delta > 0\):</strong> Phương trình có <strong>hai nghiệm phân biệt</strong>:</p>
+                    <p style="padding-left: 20px;">\(x_1 = \frac{-b + \sqrt{\Delta}}{2a}, \quad x_2 = \frac{-b - \sqrt{\Delta}}{2a}\)</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section Công cụ giải trực tiếp -->
+    <section id="tool">
+        <div class="section-title">
+            <p>Trải nghiệm thực hành</p>
+            <h2>Công Cụ Biện Luận Tự Động</h2>
+        </div>
+        <div class="card">
+            <form id="calcForm" class="calc-form">
+                <div class="input-group">
+                    <label>Hệ số a (a ≠ 0)</label>
+                    <input type="number" id="inputA" step="any" placeholder="Nhập a..." required>
+                </div>
+                <div class="input-group">
+                    <label>Hệ số b</label>
+                    <input type="number" id="inputB" step="any" placeholder="Nhập b..." required>
+                </div>
+                <div class="input-group">
+                    <label>Hệ số c</label>
+                    <input type="number" id="inputC" step="any" placeholder="Nhập c..." required>
+                </div>
+            </form>
+            <button onclick="solveEquation()" class="btn btn-primary" style="width: 100%; justify-content: center; margin-bottom: 20px;">
+                <i class="fas fa-play"></i> Thực Hiện Biện Luận
+            </button>
+
+            <div id="resultBox" class="result-box">
+                <h4 style="color: var(--primary); margin-bottom: 15px;">Các Bước Giải Chi Tiết:</h4>
+                <div class="result-step" id="step1"></div>
+                <div class="result-step" id="step2"></div>
+                <div class="result-step result-highlight" id="step3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <p>&copy; 2026 MathProfile - Chuyên đề Biện luận Phương trình bậc 2. Tất cả quyền được bảo lưu.</p>
+    </footer>
+
+    <script>
+        function solveEquation() {
+            const a = parseFloat(document.getElementById('inputA').value);
+            const b = parseFloat(document.getElementById('inputB').value);
+            const c = parseFloat(document.getElementById('inputC').value);
+            const resultBox = document.getElementById('resultBox');
+
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                alert('Vui lòng nhập đầy đủ các hệ số a, b, c!');
+                return;
+            }
+
+            if (a === 0) {
+                alert('Hệ số a phải khác 0 để là phương trình bậc 2!');
+                return;
+            }
+
+            // Bước 1: Hệ số
+            document.getElementById('step1').innerHTML = `<strong>B1:</strong> Các hệ số: a = ${a}, b = ${b}, c = ${c}`;
+
+            // Bước 2: Tính Delta
+            const delta = (b * b) - (4 * a * c);
+            document.getElementById('step2').innerHTML = `<strong>B2:</strong> Tính \\(\\Delta = b^2 - 4ac = (${b})^2 - 4 \\cdot (${a}) \\cdot (${c}) = ${delta}\\)`;
+
+            // Bước 3: Biện luận kết luận
+            let step3Text = '';
+            if (delta < 0) {
+                step3Text = `<strong>B3 Kết luận:</strong> Vì \\(\\Delta = ${delta} < 0\\) \\(\\Rightarrow\\) Phương trình <strong>VÔ NGHIỆM</strong>.`;
+            } else if (delta === 0) {
+                const x = -b / (2 * a);
+                step3Text = `<strong>B3 Kết luận:</strong> Vì \\(\\Delta = 0\\) \\(\\Rightarrow\\) Phương trình có <strong>NGHIỆM DUY NHẤT (nghiệm kép)</strong>: x = ${x.toFixed(2)}`;
+            } else {
+                const x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                const x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                step3Text = `<strong>B3 Kết luận:</strong> Vì \\(\\Delta = ${delta} > 0\\) \\(\\Rightarrow\\) Phương trình có <strong>HAI NGHIỆM PHÂN BIỆT</strong>:<br> x₁ = ${x1.toFixed(2)}, x₂ = ${x2.toFixed(2)}`;
+            }
+
+            document.getElementById('step3').innerHTML = step3Text;
+            resultBox.classList.add('active');
+
+            // Render lại công thức toán học bằng MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise([resultBox]);
+            }
+        }
+    </script>
+</body>
+</html>
